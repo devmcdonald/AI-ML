@@ -1,9 +1,9 @@
 import whisper
+from whisper.utils import get_writer
 import moviepy.editor as mp
 
 
 #Separate audio from video mp4 files
-
 titles = ["/workspaces/Fall-2023-NYU-AI/Project Checkpoint 1/Attorney General Merrick Garland The 60 Minutes Interview.mp4", 
           "/workspaces/Fall-2023-NYU-AI/Project Checkpoint 1/Charles Barkley The 60 Minutes Interview.mp4",
           "/workspaces/Fall-2023-NYU-AI/Project Checkpoint 1/Deion Sanders The 2023 60 Minutes Interview.mp4",
@@ -27,7 +27,14 @@ for t in titles:
     t=t.replace(".mp4", ".mp3")
     model = whisper.load_model("base")
     result = model.transcribe(t)
+    audio = t
     t=t.replace("/workspaces/Fall-2023-NYU-AI/Project Checkpoint 2/", "")
-    t=t.replace(".mp3", ".txt")
-    with open("/workspaces/Fall-2023-NYU-AI/Project Checkpoint 2/Whisper " + t, "w", encoding="utf-8") as txt:
-        txt.write(result["text"])
+    t=t.replace(".mp3", "")
+    output_directory = "/workspaces/Fall-2023-NYU-AI/Project Checkpoint 2"
+    options = {
+        'max_line_width': None,
+        'max_line_count': None,
+        'highlight_words': False
+    }
+    txt_writer = get_writer("txt", output_directory)
+    txt_writer(result, audio, options)
