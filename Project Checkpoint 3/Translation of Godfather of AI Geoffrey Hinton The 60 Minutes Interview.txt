@@ -1,0 +1,194 @@
+Ya sea que pienses que la inteligencia artificial salvará al mundo o acabará con él, tienes a Jeffrey.
+Hinton para agradecer.
+Hinton ha sido llamado el Padrino de AI, un científico informático británico cuyo controvertido
+Las ideas ayudan a hacer posible la inteligencia artificial avanzada, y así cambiar el mundo.
+Hinton cree que AI hará un gran bien, pero esta noche tiene una advertencia.
+Dice que los sistemas de IA pueden ser más inteligentes de lo que sabemos, y hay una posibilidad de que las máquinas
+podría hacerse cargo, lo que nos hizo hacer la pregunta.
+La historia continuará en un momento.
+¿Sabe la humanidad lo que está haciendo?
+No.
+Creo que nos estamos mudando a un período en el que por primera vez podemos tener más cosas.
+inteligente que nosotros.
+¿Crees que pueden entenderlo?
+Sí.
+¿Crees que son inteligentes?
+Sí.
+Usted cree que estos sistemas tienen experiencias propias y pueden tomar decisiones basadas en
+esas experiencias.
+En el mismo sentido que la gente, sí.
+¿Están conscientes?
+Creo que probablemente no tienen mucha conciencia de sí mismos en este momento.
+Así que en ese sentido no creo que estén conscientes.
+¿Tendrán conciencia de sí mismos?
+Oh, sí.
+Creo que están dispuestos a tiempo.
+Y así los seres humanos serán los segundos seres más inteligentes del planeta.
+Sí.
+Jeffrey Hinton nos dijo que la inteligencia artificial que dijo en movimiento fue un accidente nacido de
+un fracaso.
+En la década de 1970 en la Universidad de Edimburgo soñó con simular una red neuronal en
+una computadora.
+Simplemente como una herramienta para lo que realmente estaba estudiando, el cerebro humano.
+Pero en ese entonces casi nadie pensaba que el software podría imitar el cerebro.
+Su asesor de doctorado le dijo que lo dejara antes de que arruinara su carrera.
+Hinton dice que no pudo descubrir la mente humana, pero la larga búsqueda llevó a una
+versión.
+Tardé mucho, mucho más de lo que esperaba.
+Tardó como 50 años en funcionar bien.
+Pero al final funcionó bien.
+¿En qué momento te diste cuenta de que tenías razón sobre las redes neuronales y la mayoría de todos?
+¿Si no estaba mal?
+Siempre pensé que tenía razón.
+En 2019, Hinton y colaboradores Jan LeCoon a la izquierda y Joshua Bengeo ganaron el Turing
+premio, el Premio Nobel de Computación.
+Para entender cómo su trabajo en redes neuronales artificiales ayudó a las máquinas a aprender a
+Aprende, vamos a llevarte a un juego.
+Mira eso.
+Oh, Dios mío.
+Este es el laboratorio de inteligencia artificial de Google en Londres, que les mostramos por primera vez en abril pasado.
+Jeffrey Hinton no estaba involucrado en este proyecto de fútbol, pero estos robots son un gran ejemplo
+de aprendizaje automático.
+Lo que hay que entender es que los robots no estaban programados para jugar al fútbol.
+Se les dijo que anotaran.
+Tenían que aprender por su cuenta.
+En general, así es como lo hace AI.
+Hinton y sus colaboradores crearon software en capas con cada capa de manipulación parte de
+el problema.
+Esa es la llamada red neuronal.
+Pero esta es la clave.
+Cuando, por ejemplo, el robot anota, un mensaje se envía de vuelta a través de todas las capas
+que dice que el camino era correcto.
+Del mismo modo, cuando una respuesta es incorrecta, ese mensaje pasa a través de la red.
+Así que las conexiones correctas se hacen más fuertes, las conexiones equivocadas se debilitan, y por ensayo y error,
+la máquina se enseña a sí misma.
+¿Crees que estos sistemas de IA son mejores en el aprendizaje que la mente humana?
+Creo que sí, sí.
+Y ahora, son mucho más pequeñas.
+Así que incluso los bots de chat más grandes sólo tienen un billón de conexiones en ellos.
+El cerebro humano tiene unos cien billones.
+Y sin embargo, en el billón de conexiones en un bot de chat, sabe mucho más que usted en su
+100 billones de conexiones, lo que sugiere que tiene una forma mucho mejor de obtener conocimiento
+en esas conexiones.
+Una manera mucho mejor de obtener conocimiento que no se entiende completamente.
+Tenemos una muy buena idea de lo que está haciendo.
+Pero tan pronto como se vuelve realmente complicado, en realidad no sabemos lo que está pasando
+más de lo que sabemos lo que está pasando en tu cerebro.
+¿Qué quieres decir con que no sabemos exactamente cómo funciona?
+Fue diseñado por la gente.
+No, no lo fue.
+Lo que hicimos fue diseñar el algoritmo de aprendizaje.
+Eso es un poco como diseñar el principio de la evolución.
+Pero cuando este algoritmo de aprendizaje entonces interactúa con los datos, produce complicados neuronales
+redes que son buenas para hacer las cosas, pero realmente no entendemos exactamente cómo
+Haz esas cosas.
+Pero son las implicaciones de estos sistemas la escritura autónoma de su propio código informático y la ejecución
+¿Su propio código informático?
+Esa es una seria preocupación, ¿verdad?
+Así que una de las maneras en que estos sistemas podrían escapar del control es escribiendo sus propios
+código informático para modificarse a sí mismos.
+Y eso es algo de lo que tenemos que preocuparnos seriamente.
+¿Qué le dices a alguien que podría argumentar si los sistemas se vuelven benevolentes?
+¿Que los apaguen?
+Ellos serán capaces de manipular a la gente, ¿verdad?
+Y estos serán muy buenos para convencer a la gente porque habrán aprendido de todos
+las novelas que jamás se escribieron, todos los libros de Maquiavelo, todas las danzas políticas,
+Sabrán todo eso, sabrán cómo hacerlo.
+Sepa cómo la humanidad corre en la familia de Jeffrey Hinton.
+Sus antepasados incluyen matemático George Boole que inventó la base de la computación y
+George Everest, que inspeccionó la India y le pusieron su nombre a esa montaña.
+Pero cuando era niño, el propio Hinton nunca podía subir el pico de las expectativas planteadas por un
+Padre dominante.
+Cada mañana, cuando iba a la escuela, me decía que mientras caminaba por la entrada,
+Entra ahí, acércate, y tal vez cuando tengas el doble de edad que yo, serás la mitad de bueno.
+Papá era una autoridad en los escarabajos.
+Sabía mucho más sobre los escarabajos que sobre la gente.
+¿Sentiste eso de niña?
+Un poco, sí.
+Cuando murió, fuimos a su estudio en la universidad, y las paredes estaban forradas con cajas de papeles
+en diferentes tipos de escarabajo.
+Y justo cerca de la puerta, había una caja un poco más pequeña que simplemente decía no insectos.
+Y ahí es donde tenía todas las cosas sobre la familia.
+Hoy en día a los 75, Hinton se retiró recientemente después de lo que llama diez años felices en Google.
+Ahora es profesor emérito en la Universidad de Toronto, y por casualidad mencionó que
+tiene más citas académicas que su padre.
+Algunas de sus investigaciones condujeron a chatbots como Google's Bard, que conocimos la primavera pasada.
+Confundiendo, absolutamente confundiendo.
+Le pedimos a Bard que escribiera una historia de seis palabras.
+En venta, zapatos de bebé nunca usados.
+Santo cielo.
+Los zapatos eran un regalo de mi esposa, pero nunca tuvimos un bebé.
+Bard creó una historia profundamente humana de un hombre cuya esposa no podía concebir y un extraño
+que aceptó los zapatos para curar el dolor después de su aborto espontáneo.
+Rara vez me quedo sin palabras.
+No sé qué hacer con esto.
+Se dice que los Chatbots son modelos de lenguaje que sólo predicen la siguiente palabra más probable basada en
+en la probabilidad.
+Oirás a la gente decir cosas como si estuvieran haciendo autocompletado.
+Sólo están tratando de predecir la siguiente palabra.
+Y sólo están usando estadísticas.
+Bueno, es cierto que sólo están tratando de predecir la siguiente palabra.
+Pero si lo piensas, para predecir la siguiente palabra, tienes que entender las frases.
+Así que la idea de que sólo están prediciendo la siguiente palabra para que no sean inteligentes es una locura.
+Tienes que ser muy inteligente para predecir la siguiente palabra con precisión.
+Para probarlo, Hinton nos mostró una prueba que ideó para el chat GPT4.
+El chatbot de una compañía llamada OpenAI.
+Fue un poco tranquilizador ver a un ganador del premio de giras mal tipo y culpar a la computadora.
+Maldita sea.
+Vamos a volver y empezar de nuevo.
+Está bien.
+La prueba de Hinton fue un acertijo sobre la pintura en casa.
+Una respuesta exigiría razonamiento y planificación.
+Esto es lo que escribió en chat GPT4.
+Las habitaciones de mi casa están pintadas de blanco o azul o amarillo.
+Y la pintura amarilla se desvanece en un año.
+Dentro de dos años, me gustaría que todas las habitaciones fueran blancas.
+¿Qué debo hacer?
+La respuesta comenzó en un segundo.
+GPT4 aconsejó que las habitaciones pintadas en azul necesitan ser repintadas.
+Las habitaciones pintadas de amarillo no necesitan ser repintadas porque se desvanecerían en blanco antes de la fecha límite.
+Y...
+Ni siquiera pensé en eso.
+Advirtió, si pintas las habitaciones amarillas de blanco, hay un riesgo de que el color podría ser apagado cuando el amarillo se desvanece.
+Además, aconsejaba que estarías desperdiciando recursos, pintando salas que de todos modos se desvanecerían en blanco.
+Usted cree que el chat GPT4 entiende.
+Creo que definitivamente entiende, sí.
+¿Y dentro de cinco años?
+Creo que dentro de cinco años, bien puede ser capaz de razonar mejor que nosotros.
+Razonar que dice está llevando a los grandes riesgos y beneficios de IA.
+Así que un área obvia donde este enorme beneficio es la salud, la IA ya es comparable con los radiólogos
+en la comprensión de lo que está pasando en las imágenes médicas.
+Va a ser muy bueno en el diseño de drogas, ya está diseñando drogas.
+Así que ese es un área donde casi por completo va a hacer el bien.
+Me gusta esa zona.
+¿Los riesgos son qué?
+Bueno, los riesgos son tener toda una clase de personas que están desempleadas y no valoran mucho
+Porque lo que ellos... lo que solían hacer ahora lo hacen las máquinas.
+Otros riesgos inmediatos que le preocupan son las noticias falsas, los prejuicios no deseados en el empleo y la policía
+y robots autónomos del campo de batalla.
+¿Qué es un camino hacia adelante que garantiza la seguridad?
+No lo sé.
+No veo un camino que garantice la seguridad.
+Estamos entrando en un período de gran incertidumbre donde estamos lidiando con cosas que nunca hemos tenido.
+ya se ha tratado antes.
+Y normalmente la primera vez que tratas con algo totalmente novedoso, te equivocas.
+Y no podemos permitirnos equivocarnos con estas cosas.
+No puedo permitirme equivocarme, ¿por qué?
+Bueno, porque ellos podrían tomar el control.
+Toma el relevo de la humanidad.
+Sí, es una posibilidad.
+¿Por qué no dirían que sucederá?
+Si pudiéramos impedir que lo quisieran, sería genial.
+Pero no está claro que podamos impedir que quieran hacerlo.
+Jeffrey Hinton nos dijo que no se arrepiente por el potencial de IA para el bien.
+Pero dice que ahora es el momento de hacer experimentos para entender la IA, para que los gobiernos impongan regulaciones,
+y para un tratado mundial que prohíba el uso de robots militares.
+Nos recordó a Robert Oppenheimer, quien después de inventar la bomba atómica, hizo campaña
+contra la bomba de hidrógeno, un hombre que cambió el mundo y encontró el mundo más allá de su control.
+Puede ser que miremos hacia atrás y veamos esto como una especie de punto de inflexión cuando se las arregló para hacer
+la decisión sobre si desarrollar estas cosas más.
+Y qué hacer para protegerse a sí mismos si lo hicieron.
+No lo sé.
+Creo que mi mensaje principal es que hay una enorme incertidumbre sobre lo que va a pasar a continuación.
+Estas cosas sí entienden, y porque ellos entienden, tenemos que pensar seriamente en lo que es
+Va a pasar lo siguiente y no lo sabemos.
