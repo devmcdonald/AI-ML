@@ -1,9 +1,10 @@
 from transformers import *
 
-#Specify languages
+#Specify languages - write as variables in final product so user can choose languages
 src = "en"
 dst = "es"
 
+#Load pretrained model
 task_name = f"translation_{src}_to_{dst}"
 model_name = f"Helsinki-NLP/opus-mt-{src}-{dst}"
 
@@ -20,6 +21,8 @@ titles = ["/workspaces/Fall-2023-NYU-AI/Project Checkpoint 2/Attorney General Me
           "/workspaces/Fall-2023-NYU-AI/Project Checkpoint 2/Volodymyr Zelenskyy The 2023 60 Minutes Interview.txt",
           "/workspaces/Fall-2023-NYU-AI/Project Checkpoint 2/World Number 1 Pool Player Shane Van Boening The 60 Minutes Interview.txt",
           "/workspaces/Fall-2023-NYU-AI/Project Checkpoint 2/Yannick Nézet-Séguin The 60 Minutes Interview.txt"]
+
+#Run inference on each line of input text and write NLP output to new file
 for t in titles:
     with open(t, 'r') as f:
         lines = f.readlines()

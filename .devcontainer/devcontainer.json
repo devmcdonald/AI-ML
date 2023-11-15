@@ -1,8 +1,13 @@
 {
-	"image": "mcr.microsoft.com/devcontainers/universal:2",
+	"name": "Python 3",
+
+	"image": "mcr.microsoft.com/devcontainers/python:0-3.11",
+
 	"features": {
 		"ghcr.io/devcontainers-contrib/features/youtube-dl:2": {},
 		"ghcr.io/akhildevelops/devcontainer-features/pip:0": {},
 		"ghcr.io/devcontainers-contrib/features/yt-dlp:2": {}
-	}
+	},
+
+	"postCreateCommand": "pip3 install -r requirements.txt"
 }
