@@ -1,0 +1,570 @@
+0:01
+whether you think artificial
+0:03
+intelligence will save the world or end
+0:05
+it you have Jeffrey Hinton to thank
+0:09
+Hinton has been called The Godfather of
+0:12
+AI a British computer scientist whose
+0:15
+controversial ideas help make advanced
+0:18
+artificial intelligence possible and so
+0:22
+change the world Hinton believes that AI
+0:25
+will do enormous good but tonight he has
+0:28
+a warning he says that AI systems may be
+0:32
+more intelligent than we know and
+0:35
+there's a chance the machines could take
+0:37
+over which made us ask the
+0:41
+question the story will continue in a
+0:47
+moment does Humanity know what it's
+0:49
+doing
+0:51
+no
+0:53
+um I think we're moving into a period
+0:58
+when for the first first time ever we
+1:01
+may have things more intelligent than us
+1:04
+you believe they can understand yes you
+1:06
+believe they are intelligent yes you
+1:09
+believe these systems have experiences
+1:12
+of their own and can make decisions
+1:15
+based on those experiences in the same
+1:18
+sense as people do yes are they
+1:20
+conscious I think they probably don't
+1:22
+have much self-awareness at present so
+1:24
+in that sense I don't think they're
+1:26
+conscious will they have self-awareness
+1:28
+consciousness I oh yes I think they will
+1:31
+in time and so human beings will be the
+1:34
+second most intelligent beings on the
+1:37
+planet yeah Jeffrey Hinton told us the
+1:42
+artificial intelligence he set in motion
+1:45
+was an accident born of a failure in the
+1:48
+1970s at the University of Edinburgh he
+1:52
+dreamed of simulating a neural network
+1:55
+on a computer simply as a tool for what
+1:58
+he was really studying
+2:00
+the human brain but back then almost no
+2:04
+one thought software could mimic the
+2:05
+brain his PhD advisor told him to drop
+2:09
+it before it ruined his career Hinton
+2:12
+says he failed to figure out the human
+2:15
+mind but the long Pursuit led to an
+2:18
+artificial
+2:19
+version it took much much longer than I
+2:22
+expected it took like 50 years before it
+2:24
+worked well but in the end it did work
+2:26
+well at what point did you realize that
+2:31
+you were right about neural networks and
+2:34
+most everyone else was wrong I always
+2:37
+thought I was
+2:38
+right in 2019 Hinton and collaborators
+2:42
+Yan laon on the left and yosua Beno won
+2:47
+the touring award the Nobel Prize of
+2:50
+computing to understand how their work
+2:53
+on artificial neural networks helped
+2:55
+machines learn to learn let us take you
+2:59
+to a a
+3:00
+game look at that oh my goodness this is
+3:05
+Google's AI lab in London which we first
+3:09
+showed you this past April Jeffrey
+3:11
+Hinton wasn't involved in this soccer
+3:14
+project but these robots are a great
+3:17
+example of machine learning the thing to
+3:20
+understand is that the robots were not
+3:23
+programmed to play soccer they were told
+3:26
+to score they had to learn how on their
+3:30
+own oh
+3:32
+go in general here's how AI does it
+3:36
+Henton and his collaborators created
+3:38
+software in layers with each layer
+3:41
+handling part of the problem that's the
+3:43
+so-called neural network but this is the
+3:46
+key when for example the robot scores a
+3:50
+message is sent back down through all of
+3:53
+the layers that says that pathway was
+3:56
+right likewise when an answer is wrong
+4:00
+that message goes down through the
+4:02
+network so correct connections get
+4:05
+stronger wrong connections get weaker
+4:08
+and by trial and error the machine
+4:11
+teaches itself you think these AI
+4:14
+systems are better at learning than the
+4:17
+human mind I think they may be yes and
+4:20
+at present they're quite a lot smaller
+4:23
+so even the biggest chatbots only have
+4:26
+about a trillion Connections in them the
+4:28
+human brain has about 100 trillion and
+4:31
+yet in the trillion Connections in a
+4:33
+chatbot it knows far more than you do in
+4:37
+your 100 trillion connections which
+4:39
+suggests it's got a much better way of
+4:41
+getting knowledge into those connections
+4:43
+a much better way of getting knowledge
+4:46
+that isn't fully understood we have a
+4:48
+very good idea of sort of roughly what
+4:50
+it's doing but as soon as it gets really
+4:53
+complicated we don't actually know
+4:55
+what's going on anymore than we know
+4:56
+what's going on in your brain what do
+4:58
+you mean we don't know exactly how it
+5:01
+works it was designed by people no it
+5:05
+wasn't what we did was we designed the
+5:07
+learning algorithm that's a bit like
+5:09
+designing the principle of evolution but
+5:11
+when this learning algorithm then
+5:13
+interacts with data it produces
+5:16
+complicated neural networks that are
+5:17
+good at doing things but we don't really
+5:20
+understand exactly how they do those
+5:22
+things what are the
+5:24
+implications of these systems
+5:27
+autonomously writing their own computer
+5:29
+code and executing their own computer
+5:31
+code that's a serious worry right so one
+5:35
+of the ways in which these systems might
+5:37
+Escape control is by writing their own
+5:40
+computer code to modify
+5:42
+themselves and that's something we need
+5:45
+to seriously worry about what do you say
+5:47
+to someone who might argue if the
+5:50
+systems become benevolent just turn them
+5:52
+off they will be able to manipulate
+5:55
+people right and these will be very good
+5:58
+at convincing people because they'll
+6:00
+have learned from all the novels that
+6:02
+were ever written all the books by
+6:05
+makavelli all the political connives
+6:08
+they'll know all that stuff they'll know
+6:10
+how to do it knoow of the human kind
+6:14
+runs in Jeffrey hinton's family his
+6:18
+ancestors include mathematician George
+6:20
+buou who invented the basis of computing
+6:24
+and George Everest who surveyed India
+6:28
+and got that mountain named after him
+6:31
+but as a boy Hinton himself could never
+6:35
+climb the peak of expectations raised by
+6:38
+a domineering father every morning when
+6:41
+I went to school he'd actually say to me
+6:44
+as I walked down the driveway get in
+6:45
+their pitching and maybe when you're
+6:47
+twice as old as me you'll be half as
+6:49
+good dad was an authority on Beatles he
+6:53
+knew a lot more about beatles than he
+6:55
+knew about people did you feel that as a
+6:57
+child a bit yes
+7:00
+when he died we went to his study at the
+7:03
+University and the walls were lined with
+7:06
+boxes of papers on different kinds of
+7:08
+beetle and just near the door there was
+7:11
+a slightly smaller box that simply said
+7:13
+not insects and that's where he had all
+7:16
+the things about the
+7:17
+family today at 75 Hinton recently
+7:21
+retired after what he calls 10 happy
+7:24
+years at Google now he's professor
+7:27
+ameritus at the University of Toronto
+7:30
+and he happened to mention he has more
+7:33
+academic citations than his father some
+7:36
+of his research led to chatbots like
+7:39
+Google's Bard which we met last spring
+7:42
+confounding absolutely confounding we
+7:45
+asked Bard to write a story from six
+7:48
+words for sale baby shoes never
+7:52
+worn holy cow the shoes were a gift from
+7:57
+my wife but we never had a baby Bard
+8:00
+created a deeply human tale of a man
+8:03
+whose wife could not conceive and a
+8:05
+stranger who accepted the shoes to heal
+8:08
+the pain after her miscarriage I am
+8:12
+rarely
+8:14
+speechless I don't know what to make of
+8:16
+this chatbots are said to be language
+8:19
+models that just predict the next most
+8:22
+likely word based on probability you'll
+8:25
+hear people saying things like they're
+8:27
+just doing autocomplete they're just
+8:28
+trying to pred the next word and they're
+8:31
+just using
+8:32
+statistics well it's true they're just
+8:35
+trying to predict the next word but if
+8:37
+you think about it to predict the next
+8:39
+word you have to understand the
+8:43
+sentences so the idea they just
+8:45
+predicting the next word so they're not
+8:46
+intelligent is crazy you have to be
+8:48
+really intelligent to predict the next
+8:50
+word really accurately to prove it
+8:53
+Hinton showed us a test he devised for
+8:56
+chat
+8:57
+gp4 the chatbot from a company called
+9:00
+open AI it was sort of reassuring to see
+9:04
+a turing Award winner mistype and blame
+9:07
+the computer oh damn this thing we're
+9:10
+going to go back and start again that's
+9:12
+okay hinton's test was a riddle about
+9:15
+house painting an answer would demand
+9:18
+reasoning and
+9:19
+planning this is what he typed into chat
+9:24
+gp4 the rooms in my house are painted
+9:27
+white or blue or yellow and yellow paint
+9:30
+Fades to White within a year in two
+9:32
+years time I'd like all the rooms to be
+9:34
+white what should I do the answer began
+9:37
+in one second gp4 advised the rooms
+9:41
+painted in blue need to be repainted the
+9:45
+rooms painted in yellow don't need to be
+9:48
+repainted because they would Fade to
+9:50
+White before the deadline and oh I
+9:55
+didn't even think of that it warned if
+9:58
+you paint the yellow rooms white there's
+10:00
+a risk the color might be off when the
+10:03
+yellow Fades besides it advised you'd be
+10:07
+wasting resources painting rooms that
+10:09
+were going to Fade to White anyway you
+10:12
+believe that chat GPD
+10:14
+4 understands I believe it definitely
+10:18
+understands yes and in five years time I
+10:21
+think in 5 years time it may well be
+10:23
+able to reason better than us reasoning
+10:26
+that he says is leading to ai's risks
+10:30
+and great
+10:31
+benefits so an obvious area where
+10:34
+there's huge benefits is Healthcare AI
+10:38
+is already comparable with Radiologists
+10:40
+at understanding what's going on in
+10:42
+medical
+10:43
+images it's going to be very good at
+10:45
+designing drugs it already is designing
+10:47
+drugs so that's an area where it's
+10:51
+almost entirely going to do good I like
+10:54
+that area the risks are
+10:57
+what well the risks are having a whole
+11:00
+class of people who are
+11:02
+unemployed and not valued much because
+11:05
+what they what they used to do is now
+11:07
+done by machines other immediate risks
+11:10
+he worries about include fake news
+11:13
+unintended bias in employment and
+11:16
+policing and autonomous Battlefield
+11:21
+robots what is a path forward that
+11:25
+ensures
+11:26
+safety I don't know I I can't see a path
+11:30
+that guarantees
+11:31
+safety that we're entering a period of
+11:34
+great uncertainty where we're dealing
+11:35
+with things we've never dealt with
+11:37
+before and normally the first time you
+11:40
+deal with something totally novel you
+11:41
+get it wrong and we can't afford to get
+11:43
+it wrong with these things can't afford
+11:45
+to get it wrong why well because they
+11:47
+might take over take over from Humanity
+11:51
+yes that's a possibility why would they
+11:53
+saying it will happen if we could stop
+11:55
+them ever wanting to that would be great
+11:57
+but it's not clear we can stop them ever
+11:59
+wanting
+12:00
+to Jeffrey Hinton told us he has no
+12:04
+regrets because of ai's potential for
+12:07
+good but he says now is the moment to
+12:11
+run experiments to understand AI for
+12:14
+governments to impose regulations and
+12:17
+for a world treaty to ban the use of
+12:21
+military robots he reminded us of Robert
+12:25
+Oppenheimer who after inventing the
+12:27
+atomic bomb campaigned against the
+12:30
+hydrogen bomb a man who changed the
+12:33
+world and found the world Beyond his
+12:37
+control it maybe we look back and see
+12:39
+this as a kind of Turning Point when
+12:42
+Humanity had to make the decision about
+12:43
+whether to develop these things further
+12:46
+and what to do to protect themselves if
+12:48
+they did um I don't know I think my main
+12:52
+message is there's enormous uncertainty
+12:55
+about what's going to happen
+12:57
+next these things do
+12:59
+understand and because they understand
+13:02
+we need to think hard about what's going
+13:04
+to happen next and we just don't
+13:10
+know
