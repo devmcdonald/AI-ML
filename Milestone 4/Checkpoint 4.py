@@ -8,7 +8,7 @@ device = "cuda" if torch.cuda.is_available() else "cpu"
 lang = "es"
 
 #Load model for inference
-model_name = f"tts_models/{lang}/mai/tacotron2-DDC"
+model_name = f"tts_models/{lang}/css10/vits"
 
 #Path to translated text files
 titles = ["/workspaces/Fall-2023-NYU-AI/Milestone 3/Translation of Attorney General Merrick Garland The 60 Minutes Interview.txt", 
@@ -30,7 +30,7 @@ for title in titles:
     
     # Init TTS with the target model name
     tts = TTS(model_name=model_name, progress_bar=False).to(device)
-
+    
     with open(title, 'r') as f:
         #Read text file into string
         txt = f.read()

@@ -64,7 +64,7 @@ GitPython==3.1.40
 google-auth==2.23.4
 google-auth-oauthlib==1.1.0
 grpcio==1.59.2
-gruut==2.3.4
+gruut==2.2.3
 gruut-ipa==0.13.0
 gruut-lang-de==2.0.0
 gruut-lang-en==2.0.0
