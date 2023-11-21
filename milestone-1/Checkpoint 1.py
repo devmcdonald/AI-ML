@@ -13,6 +13,6 @@ links = ["https://www.youtube.com/watch?v=d403nALfQrE",
 
 for l in links:
     vid = YouTube(l)
-    vid.streams.filter(progressive="True").get_highest_resolution().download("/workspaces/Fall-2023-NYU-AI/Project Checkpoint 1")
+    vid.streams.filter(progressive="True").get_highest_resolution().download("/workspaces/Fall-2023-NYU-AI/milestone-1")
     
 
