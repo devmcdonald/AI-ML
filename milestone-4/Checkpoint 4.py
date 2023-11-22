@@ -25,8 +25,8 @@ titles = ["/workspaces/Fall-2023-NYU-AI/milestone-3/Translation of Attorney Gene
 
 for title in titles:
     #Create output path
-    OUTPUT_PATH=title.replace("Milestone 3/Translation of ", "Milestone 4/")
-    OUTPUT_PATH=OUTPUT_PATH.replace(".txt", " Audio.wav")
+    out_path=title.replace("Milestone 3/Translation of ", "Milestone 4/")
+    out_path=out_path.replace(".txt", " Audio.wav")
     
     # Init TTS with the target model name
     tts = TTS(model_name=model_name, progress_bar=False).to(device)
@@ -35,4 +35,4 @@ for title in titles:
         #Read text file into string
         txt = f.read()
         #Feed string into model and save output
-        tts.tts_to_file(text=txt, file_path=OUTPUT_PATH)
+        tts.tts_to_file(text=txt, file_path=out_path)
