@@ -5,6 +5,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 
+
 # Question 1a - generate gs variable
 # gs is generated as a random normal distribution using the mean and standard deviation presented in the problem statement
 # Plotted with matplotlib
