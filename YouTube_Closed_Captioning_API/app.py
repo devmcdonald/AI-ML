@@ -26,8 +26,8 @@ link = st.text_input("YouTube URL: ")
 #Only continue with input link
 if link != '':    
     vid = YouTube(link, use_oauth=True, allow_oauth_cache=True)
-    vid.streams.filter(progressive="True").get_highest_resolution().download("/workspaces/AI-&-ML/YouTube_Closed_Captioning_API")
-    path = "/workspaces/AI-&-ML/YouTube_Closed_Captioning_API/" + vid.title + ".mp4"
+    vid.streams.filter(progressive="True").get_highest_resolution().download("/workspaces/AI-ML/YouTube_Closed_Captioning_API")
+    path = "/workspaces/AI-ML/YouTube_Closed_Captioning_API/" + vid.title + ".mp4"
     title = vid.title
 
     #Specify languages 
@@ -62,12 +62,12 @@ if link != '':
         result = engModel.transcribe(engAudioFile)
         
         audio = engAudioFile
-        output_directory = "/workspaces/AI-&-ML/YouTube_Closed_Captioning_API"
+        output_directory = "/workspaces/AI-ML/YouTube_Closed_Captioning_API"
         
         srt_writer = get_writer("srt", output_directory)
         srt_writer(result, audio)
     
-        output_directory = "/workspaces/AI-&-ML/YouTube_Closed_Captioning_API"  
+        output_directory = "/workspaces/AI-ML/YouTube_Closed_Captioning_API"  
         engTextFile = output_directory + '/' + title + '.srt' #to reference in future
         engTextFile=engTextFile.replace(":", "")
 
@@ -145,12 +145,12 @@ if link != '':
         
         
         
-        fixedText = f"/workspaces/AI-&-ML/YouTube_Closed_Captioning_API/{title} fixed translation.srt"
+        fixedText = f"/workspaces/AI-ML/YouTube_Closed_Captioning_API/{title} fixed translation.srt"
         fixedText = fixedText.replace(":", "")
         
         translatedAudio = fixedText.replace(".srt", ".mp3")
         #Add translated subtitles to video
-        output_vid = "/workspaces/AI-&-ML/YouTube_Closed_Captioning_API/output_vid.mp4"
+        output_vid = "/workspaces/AI-ML/YouTube_Closed_Captioning_API/output_vid.mp4"
         with open(fixedText, 'r', encoding='utf-8') as file:
             sub_content = file.read()
             
