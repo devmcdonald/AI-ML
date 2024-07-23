@@ -2,6 +2,7 @@ streamlit==1.28.2
 transformers==4.33.3
 pytube==15.0.0
 openai
+openai-whisper==20231117
 whisper==1.1.10
 moviepy==1.0.3
 TTS==0.20.6
