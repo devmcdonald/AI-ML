@@ -185,6 +185,7 @@ pynndescent
 pyparsing
 pypinyin
 pysbd
+pysrt
 python-crfsuite
 python-dateutil
 python-json-logger
