@@ -8,3 +8,4 @@ moviepy==1.0.3
 TTS==0.20.6
 torch==2.1.0
 pysrt
+xformers
