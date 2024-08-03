@@ -27,7 +27,18 @@ from os import getcwd
 #change_settings({"IMAGEMAGICK_BINARY": r"C:\\Program Files\\ImageMagick-7.1.1-Q16-HDRI\\magick.exe"})
 
 # Uncomment for public deployment
-change_settings({"IMAGEMAGICK_BINARY": requests.get("https://github.com/devmcdonald/AI-ML/YouTube_Closed_Captioning_API/magick.exe")})
+# Step 1: Download the file
+url = "https://github.com/devmcdonald/AI-ML/YouTube_Closed_Captioning_API/magick.exe"
+response = requests.get(url)
+
+# Step 2: Save it to a local path
+local_path = "magick.exe"
+with open(local_path, "wb") as file:
+    file.write(response.content)
+
+# Step 3: Update the settings
+IMAGEMAGICK_BINARY = os.path.abspath(local_path)
+change_settings({"IMAGEMAGICK_BINARY": os.path.abspath(local_path)})
 
 # Progress callback function
 def on_progress(stream, chunk, bytes_remaining):
