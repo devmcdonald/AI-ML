@@ -20,7 +20,9 @@ from transformers import pipeline
 from urllib.error import HTTPError
 import os
 from moviepy.config import change_settings
-change_settings({"IMAGEMAGICK_BINARY": r"C:\\Program Files\\ImageMagick-7.1.1-Q16-HDRI\\magick.exe"})
+
+# Uncomment for local deployment
+#change_settings({"IMAGEMAGICK_BINARY": r"C:\\Program Files\\ImageMagick-7.1.1-Q16-HDRI\\magick.exe"})
 
 # Progress callback function
 def on_progress(stream, chunk, bytes_remaining):
