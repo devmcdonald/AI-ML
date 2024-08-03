@@ -25,7 +25,7 @@ from moviepy.config import change_settings
 #change_settings({"IMAGEMAGICK_BINARY": r"C:\\Program Files\\ImageMagick-7.1.1-Q16-HDRI\\magick.exe"})
 
 # Uncomment for public deployment
-change_settings({"IMAGEMAGICK_BINARY": r"magick.exe"})
+change_settings({"IMAGEMAGICK_BINARY": r"YouTube_Closed_Captioning_API\\magick.exe"})
 
 # Progress callback function
 def on_progress(stream, chunk, bytes_remaining):
