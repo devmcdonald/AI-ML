@@ -27,14 +27,7 @@ from os import getcwd
 #change_settings({"IMAGEMAGICK_BINARY": r"C:\\Program Files\\ImageMagick-7.1.1-Q16-HDRI\\magick.exe"})
 
 # Uncomment for public deployment
-"""
-url = "https://github.com/devmcdonald/AI-ML/blob/f52d03c76bc5170d315901bdfff34d50f602b050/YouTube_Closed_Captioning_API/magick.exe"
-directory = getcwd()
-filename = directory + 'magick.exe'
-r = requests.get(url)
-f = open(filename, 'w')
-"""
-change_settings({"IMAGEMAGICK_BINARY": r"https://github.com/devmcdonald/AI-ML/YouTube_Closed_Captioning_API/magick.exe"})
+change_settings({"IMAGEMAGICK_BINARY": requests.get(r"https://github.com/devmcdonald/AI-ML/YouTube_Closed_Captioning_API/magick.exe")})
 
 # Progress callback function
 def on_progress(stream, chunk, bytes_remaining):
