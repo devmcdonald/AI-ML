@@ -1,10 +1,12 @@
 import streamlit as st
 from transformers import *
 from PIL import Image
-from pytube import YouTube
+from pytubefix import YouTube
+from pytubefix.cli import on_progress
+from pytube.exceptions import VideoUnavailable
 import openai
 import whisper
-from whisper.utils import get_writer
+from whisper.utils import get_writer, WriteSRT
 from moviepy.editor import TextClip, CompositeVideoClip, VideoFileClip, AudioFileClip
 from moviepy.video.tools.subtitles import SubtitlesClip
 import os.path
@@ -15,6 +17,30 @@ import re
 import sys
 import pysrt
 from transformers import pipeline
+from urllib.error import HTTPError
+import os
+from moviepy.config import change_settings
+change_settings({"IMAGEMAGICK_BINARY": r"C:\\Program Files\\ImageMagick-7.1.1-Q16-HDRI\\magick.exe"})
+
+# Progress callback function
+def on_progress(stream, chunk, bytes_remaining):
+    total_size = stream.filesize
+    bytes_downloaded = total_size - bytes_remaining
+    percentage_of_completion = bytes_downloaded / total_size * 100
+    print(f"Download progress: {percentage_of_completion:.2f}%")
+    
+# Sanitize file name to avoid special characters issues
+def sanitize_filename(filename):
+    return re.sub(r'[\\/*?:"<>|]', "", filename)
+
+def format_timestamp(seconds):
+    milliseconds = int((seconds % 1) * 1000)
+    seconds = int(seconds)
+    minutes = seconds // 60
+    seconds = seconds % 60
+    hours = minutes // 60
+    minutes = minutes % 60
+    return f"{hours:02}:{minutes:02}:{seconds:02},{milliseconds:03}"
 
 #Page title
 st.title("Foreign Whispers")
@@ -23,58 +49,58 @@ st.title("Foreign Whispers")
 link = ''
 link = st.text_input("YouTube URL: ")
 
-#Only continue with input link
-if link != '':    
-    vid = YouTube(link, use_oauth=True, allow_oauth_cache=True)
-    vid.streams.filter(progressive="True").get_highest_resolution().download("/workspaces/AI-ML/YouTube_Closed_Captioning_API")
-    path = "/workspaces/AI-ML/YouTube_Closed_Captioning_API/" + vid.title + ".mp4"
+# Only continue with input link
+if link:
+    try:
+        # pytubefix version
+        vid = YouTube(link, on_progress_callback=on_progress)
+        ys = vid.streams.get_highest_resolution()
+        sanitized_title = sanitize_filename(vid.title)
+        video_path = f"{sanitized_title}.mp4"
+        ys.download(filename=video_path)
+        
+    except Exception as e:
+        st.error(f"An error occurred: {e}")
+        st.stop()  # Stop execution if there's an error in downloading the video
+
     title = vid.title
 
-    #Specify languages 
+    if not os.path.exists(video_path):
+        st.error(f"Downloaded video file {video_path} does not exist.")
+        st.stop()  # Stop execution if the video file doesn't exist
+
+    # Specify languages 
     src = "en"
     lang = st.selectbox("Target language", ["", "Spanish", "French", "Dutch", "Finnish", "Hungarian"])
-    if lang == "Spanish":
-        dst = "es"
-    elif lang == "French":
-        dst = "fr"
-    elif lang == "Dutch":
-        dst = "nl"
-    elif lang == "Finnish":
-        dst = "fi"
-    elif lang == "Hungarian":
-        dst = "hu"
-    else:
-        dst = ''
-        
-    #Only advance if destination language selected    
-    if dst != '':
-        #Separate audio from video file
-        path = path.replace(":", "")
-        video = VideoFileClip(path)
-        audio = video.audio
-        path=path.replace(".mp4", ".mp3")
-        audio.write_audiofile(path)
-        engAudioFile = path #to reference in future
+    lang_map = {"Spanish": "es", "French": "fr", "Dutch": "nl", "Finnish": "fi", "Hungarian": "hu"}
+    dst = lang_map.get(lang, '')
 
-    
-        #Translate audio files to text (English)
+    # Only advance if destination language selected    
+    if dst:
+        # Separate audio from video file
+        video = VideoFileClip(video_path)
+        audio = video.audio
+        audio_path = f"{sanitized_title}.mp3"
+        audio.write_audiofile(audio_path)
+        engAudioFile = audio_path  # to reference in future
+            
+        # Translate audio files to text (English)
         engModel = whisper.load_model("base")
         result = engModel.transcribe(engAudioFile)
-        
-        audio = engAudioFile
-        output_directory = "/workspaces/AI-ML/YouTube_Closed_Captioning_API"
-        
-        srt_writer = get_writer("srt", output_directory)
-        srt_writer(result, audio)
-    
-        output_directory = "/workspaces/AI-ML/YouTube_Closed_Captioning_API"  
-        engTextFile = output_directory + '/' + title + '.srt' #to reference in future
-        engTextFile=engTextFile.replace(":", "")
-
-        translationText=engTextFile.replace(".srt", " translation.srt")
-        
-
-          
+            
+        # Save transcription as SRT file
+        srt_path = f"{sanitized_title}.srt"
+        with open(srt_path, 'w') as srt_file:
+            for i, segment in enumerate(result["segments"]):
+                start = segment["start"]
+                end = segment["end"]
+                text = segment["text"]
+                srt_file.write(f"{i + 1}\n")
+                srt_file.write(f"{format_timestamp(start)} --> {format_timestamp(end)}\n")
+                srt_file.write(f"{text}\n\n")
+            
+        engTextFile = srt_path            
+                  
         #Load pretrained translation model
         task_name = f"translation_{src}_to_{dst}"
         model_name = f"Helsinki-NLP/opus-mt-{src}-{dst}"
@@ -145,14 +171,22 @@ if link != '':
         
         
         
-        fixedText = f"/workspaces/AI-ML/YouTube_Closed_Captioning_API/{title} fixed translation.srt"
+        fixedText = f"{title} fixed translation.srt"
         fixedText = fixedText.replace(":", "")
         
         translatedAudio = fixedText.replace(".srt", ".mp3")
         #Add translated subtitles to video
-        output_vid = "/workspaces/AI-ML/YouTube_Closed_Captioning_API/output_vid.mp4"
-        with open(fixedText, 'r', encoding='utf-8') as file:
-            sub_content = file.read()
+        output_vid = "output_vid.mp4"
+        try:
+            with open(fixedText, 'r', encoding='utf-8', errors='replace') as file:
+                sub_content = file.read()
+        except UnicodeDecodeError:
+            try:
+                with open(fixedText, 'r', encoding='ISO-8859-1') as file:
+                    sub_content = file.read()
+            except UnicodeDecodeError:
+                with open(fixedText, 'r', encoding='cp1252', errors='replace') as file:
+                    sub_content = file.read()
             
         generator = lambda txt: TextClip(txt, font='Arial', fontsize=28, color='white')
         subs = SubtitlesClip(fixedText, generator) 
@@ -165,8 +199,8 @@ if link != '':
         translatedVideo.write_videofile(output_vid)
         
         # Upload final video to streamlit
-        st.video(output_vid, format="video/mp4", start_time=0)
-        
+        st.video(output_vid, format="video/mp4", start_time=0) 
+
         
       
             
