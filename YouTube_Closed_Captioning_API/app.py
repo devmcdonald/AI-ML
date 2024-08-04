@@ -22,35 +22,32 @@ import os
 from moviepy.config import change_settings
 import requests
 from os import getcwd
+import subprocess
 
 # Uncomment for local deployment
 #change_settings({"IMAGEMAGICK_BINARY": r"C:\\Program Files\\ImageMagick-7.1.1-Q16-HDRI\\magick.exe"})
 
 # Uncomment for public deployment
-# Step 1: Download the file
-url = "https://github.com/devmcdonald/AI-ML/YouTube_Closed_Captioning_API/magick.exe"
-response = requests.get(url)
+def find_imagemagick():
+    # Use the 'which' command to find the path of the magick executable
+    result = subprocess.run(["which", "magick"], stdout=subprocess.PIPE)
+    path = result.stdout.decode().strip()
+    if path:
+        return path
+    else:
+        raise FileNotFoundError("ImageMagick 'magick' executable not found.")
 
-# Check if the download was successful
-if response.status_code == 200:
-    # Step 2: Save it to a local path (e.g., current directory or a writable directory)
-    local_path = os.path.join(os.getcwd(), "magick.exe")
-    with open(local_path, "wb") as file:
-        file.write(response.content)
+# Step 1: Locate the ImageMagick binary
+try:
+    imagemagick_path = find_imagemagick()
+    st.write(f"ImageMagick binary found at: {imagemagick_path}")
 
-    # Step 3: Ensure the path to the ImageMagick binary is correct
-    IMAGEMAGICK_BINARY = os.path.abspath(local_path)
-
-    # Print the path to verify
-    st.write(f"ImageMagick binary path: {IMAGEMAGICK_BINARY}")
-
-    # Step 4: Update the configuration for MoviePy or the relevant library
-    change_settings({"IMAGEMAGICK_BINARY": IMAGEMAGICK_BINARY})
-
+    # Step 2: Update MoviePy configuration
+    change_settings({"IMAGEMAGICK_BINARY": imagemagick_path})
     st.success("ImageMagick configuration updated successfully!")
 
-else:
-    st.error("Failed to download the ImageMagick executable.")
+except FileNotFoundError as e:
+    st.error(str(e))
 
 # Progress callback function
 def on_progress(stream, chunk, bytes_remaining):
