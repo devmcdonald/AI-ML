@@ -33,47 +33,19 @@ import subprocess
 import streamlit as st
 from moviepy.config import change_settings
 
-def find_imagemagick():
-    # Search common directories and PATH directories
-    paths_to_check = [
-        "/usr/bin/magick",
-        "/usr/local/bin/magick",
-        "/bin/magick",
-        "/snap/bin/magick",
-        "/usr/local/ImageMagick/bin/magick"
-    ]
-    
-    # Add directories from the PATH environment variable
-    paths_to_check.extend(os.environ.get("PATH", "").split(os.pathsep))
+def check_package_installed(package_name):
+    try:
+        result = subprocess.run(['convert', '--version'], capture_output=True, text=True)
+        return result.returncode == 0
+    except FileNotFoundError:
+        return False
 
-    # Search for the magick executable in the specified paths
-    for path in paths_to_check:
-        if os.path.isdir(path):
-            for root, dirs, files in os.walk(path):
-                if "magick" in files:
-                    magick_path = os.path.join(root, "magick")
-                    if os.access(magick_path, os.X_OK):
-                        return magick_path
+st.title("Verify ImageMagick Installation")
 
-    # Fallback: Use the 'which' command to find the path of the magick executable
-    result = subprocess.run(["which", "magick"], stdout=subprocess.PIPE)
-    path = result.stdout.decode().strip()
-    if path:
-        return path
-    else:
-        raise FileNotFoundError("ImageMagick 'magick' executable not found.")
-
-# Step 1: Locate the ImageMagick binary
-try:
-    imagemagick_path = find_imagemagick()
-    st.write(f"ImageMagick binary found at: {imagemagick_path}")
-
-    # Step 2: Update MoviePy configuration
-    change_settings({"IMAGEMAGICK_BINARY": imagemagick_path})
-    st.success("ImageMagick configuration updated successfully!")
-
-except FileNotFoundError as e:
-    st.error(str(e))
+if check_package_installed("imagemagick"):
+    st.success("ImageMagick is installed.")
+else:
+    st.error("ImageMagick is not installed.")
 
 
 # Progress callback function
