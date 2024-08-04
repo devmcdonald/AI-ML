@@ -28,24 +28,11 @@ import subprocess
 #change_settings({"IMAGEMAGICK_BINARY": r"C:\\Program Files\\ImageMagick-7.1.1-Q16-HDRI\\magick.exe"})
 
 # Uncomment for public deployment
-import os
-import subprocess
-import streamlit as st
-from moviepy.config import change_settings
+import moviepy.config as mpy_config
 
-def check_package_installed(package_name):
-    try:
-        result = subprocess.run(['convert', '--version'], capture_output=True, text=True)
-        return result.returncode == 0
-    except FileNotFoundError:
-        return False
+# Set the path to the ImageMagick binary
+mpy_config.change_settings({"IMAGEMAGICK_BINARY": "/usr/bin/convert"})
 
-st.title("Verify ImageMagick Installation")
-
-if check_package_installed("imagemagick"):
-    st.success("ImageMagick is installed.")
-else:
-    st.error("ImageMagick is not installed.")
 
 
 # Progress callback function
