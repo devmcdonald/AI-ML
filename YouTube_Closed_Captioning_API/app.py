@@ -28,8 +28,27 @@ import subprocess
 #change_settings({"IMAGEMAGICK_BINARY": r"C:\\Program Files\\ImageMagick-7.1.1-Q16-HDRI\\magick.exe"})
 
 # Uncomment for public deployment
+import os
+import subprocess
+import streamlit as st
+from moviepy.config import change_settings
+
 def find_imagemagick():
-    # Use the 'which' command to find the path of the magick executable
+    # List of common directories to search for the magick executable
+    common_paths = [
+        "/usr/bin/magick",
+        "/usr/local/bin/magick",
+        "/bin/magick",
+        "/snap/bin/magick",
+        "/usr/local/ImageMagick/bin/magick"
+    ]
+    
+    # Check if magick is found in any of the common paths
+    for path in common_paths:
+        if os.path.isfile(path) and os.access(path, os.X_OK):
+            return path
+    
+    # Fallback: Use the 'which' command to find the path of the magick executable
     result = subprocess.run(["which", "magick"], stdout=subprocess.PIPE)
     path = result.stdout.decode().strip()
     if path:
@@ -48,6 +67,25 @@ try:
 
 except FileNotFoundError as e:
     st.error(str(e))
+
+# Your Streamlit app code continues here
+st.write(os.environ)
+import os
+
+# Print all environment variables
+st.write("Environment variables:")
+for key, value in os.environ.items():
+    st.write(f"{key}: {value}")
+
+# Check if a specific environment variable indicates the installation path
+imagemagick_path = os.environ.get('IMAGEMAGICK_HOME')
+if imagemagick_path:
+    imagemagick_path = os.path.join(imagemagick_path, "bin", "magick")
+    st.write(f"Found ImageMagick at: {imagemagick_path}")
+    change_settings({"IMAGEMAGICK_BINARY": imagemagick_path})
+else:
+    st.error("ImageMagick path not found in environment variables.")
+
 
 # Progress callback function
 def on_progress(stream, chunk, bytes_remaining):
