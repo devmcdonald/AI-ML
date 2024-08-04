@@ -31,19 +31,26 @@ from os import getcwd
 url = "https://github.com/devmcdonald/AI-ML/YouTube_Closed_Captioning_API/magick.exe"
 response = requests.get(url)
 
-# Step 2: Save it to a local path
-local_path = "magick.exe"
-with open(local_path, "wb") as file:
-    file.write(response.content)
+# Check if the download was successful
+if response.status_code == 200:
+    # Step 2: Save it to a local path (e.g., current directory or a writable directory)
+    local_path = os.path.join(os.getcwd(), "magick.exe")
+    with open(local_path, "wb") as file:
+        file.write(response.content)
 
-# Step 3: Ensure the path to the ImageMagick binary is correct
-IMAGEMAGICK_BINARY = os.path.abspath(local_path)
+    # Step 3: Ensure the path to the ImageMagick binary is correct
+    IMAGEMAGICK_BINARY = os.path.abspath(local_path)
 
-# Print the path to verify
-print(IMAGEMAGICK_BINARY)
+    # Print the path to verify
+    st.write(f"ImageMagick binary path: {IMAGEMAGICK_BINARY}")
 
-# Step 4: Update the configuration for MoviePy or the relevant library
-change_settings({"IMAGEMAGICK_BINARY": IMAGEMAGICK_BINARY})
+    # Step 4: Update the configuration for MoviePy or the relevant library
+    change_settings({"IMAGEMAGICK_BINARY": IMAGEMAGICK_BINARY})
+
+    st.success("ImageMagick configuration updated successfully!")
+
+else:
+    st.error("Failed to download the ImageMagick executable.")
 
 # Progress callback function
 def on_progress(stream, chunk, bytes_remaining):
