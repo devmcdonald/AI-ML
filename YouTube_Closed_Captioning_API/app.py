@@ -36,9 +36,14 @@ local_path = "magick.exe"
 with open(local_path, "wb") as file:
     file.write(response.content)
 
-# Step 3: Update the settings
+# Step 3: Ensure the path to the ImageMagick binary is correct
 IMAGEMAGICK_BINARY = os.path.abspath(local_path)
-change_settings({"IMAGEMAGICK_BINARY": os.path.abspath(local_path)})
+
+# Print the path to verify
+print(IMAGEMAGICK_BINARY)
+
+# Step 4: Update the configuration for MoviePy or the relevant library
+change_settings({"IMAGEMAGICK_BINARY": IMAGEMAGICK_BINARY})
 
 # Progress callback function
 def on_progress(stream, chunk, bytes_remaining):
