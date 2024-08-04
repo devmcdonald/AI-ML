@@ -34,8 +34,8 @@ import streamlit as st
 from moviepy.config import change_settings
 
 def find_imagemagick():
-    # List of common directories to search for the magick executable
-    common_paths = [
+    # Search common directories and PATH directories
+    paths_to_check = [
         "/usr/bin/magick",
         "/usr/local/bin/magick",
         "/bin/magick",
@@ -43,11 +43,18 @@ def find_imagemagick():
         "/usr/local/ImageMagick/bin/magick"
     ]
     
-    # Check if magick is found in any of the common paths
-    for path in common_paths:
-        if os.path.isfile(path) and os.access(path, os.X_OK):
-            return path
-    
+    # Add directories from the PATH environment variable
+    paths_to_check.extend(os.environ.get("PATH", "").split(os.pathsep))
+
+    # Search for the magick executable in the specified paths
+    for path in paths_to_check:
+        if os.path.isdir(path):
+            for root, dirs, files in os.walk(path):
+                if "magick" in files:
+                    magick_path = os.path.join(root, "magick")
+                    if os.access(magick_path, os.X_OK):
+                        return magick_path
+
     # Fallback: Use the 'which' command to find the path of the magick executable
     result = subprocess.run(["which", "magick"], stdout=subprocess.PIPE)
     path = result.stdout.decode().strip()
@@ -67,24 +74,6 @@ try:
 
 except FileNotFoundError as e:
     st.error(str(e))
-
-# Your Streamlit app code continues here
-st.write(os.environ)
-import os
-
-# Print all environment variables
-st.write("Environment variables:")
-for key, value in os.environ.items():
-    st.write(f"{key}: {value}")
-
-# Check if a specific environment variable indicates the installation path
-imagemagick_path = os.environ.get('IMAGEMAGICK_HOME')
-if imagemagick_path:
-    imagemagick_path = os.path.join(imagemagick_path, "bin", "magick")
-    st.write(f"Found ImageMagick at: {imagemagick_path}")
-    change_settings({"IMAGEMAGICK_BINARY": imagemagick_path})
-else:
-    st.error("ImageMagick path not found in environment variables.")
 
 
 # Progress callback function
