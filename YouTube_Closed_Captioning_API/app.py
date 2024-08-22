@@ -206,7 +206,7 @@ if link:
         translatedAudio = fixedText.replace(".srt", ".mp3")
         #Add translated subtitles to video
         output_vid = "output_vid.mp4"
-        add_subtitles_to_video(video, fixedText, output_vid)
+        add_subtitles_to_video(video_path, fixedText, output_vid)
         """
         try:
             with open(fixedText, 'r', encoding='utf-8', errors='replace') as file:
@@ -226,7 +226,7 @@ if link:
         
         # Replace audio of video
         audio = AudioFileClip(translatedAudio)
-        translatedVideo = result.set_audio(audio)
+        translatedVideo = output_vid.set_audio(audio)
         translatedVideo.write_videofile(output_vid)
         
         # Upload final video to streamlit
