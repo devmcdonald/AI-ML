@@ -37,15 +37,15 @@ def add_subtitles_to_video(input_video, subtitle_file, output_video):
     try:
         # Construct the FFmpeg command
         command = [
-            'ffmpeg',
-            '-i', input_video,
-            '-vf', f"subtitles={subtitle_file}",
-            '-c:a', 'copy',
-            output_video
-        ]
+        'ffmpeg',
+        '-i', f"\"{input_video}\"",
+        '-vf', f"subtitles=\"{subtitle_file}\"",
+        '-c:a', 'copy',
+        output_video
+    ]
         
         # Run the FFmpeg command
-        subprocess.run(command, check=True)
+        subprocess.run(' '.join(command), check=True, shell=True)
         print(f"Subtitles added successfully. Output file: {output_video}")
     
     except subprocess.CalledProcessError as e:
@@ -226,7 +226,11 @@ if link:
         
         # Replace audio of video
         audio = AudioFileClip(translatedAudio)
-        video_clip = VideoFileClip(output_vid)
+        try:
+            video_clip = VideoFileClip(output_vid)
+        except Exception as e:
+            print(f"Failed to load the video file: {e}")
+            exit()
         translatedVideo = video_clip.set_audio(audio)
         translatedVideo.write_videofile(output_vid)
         
