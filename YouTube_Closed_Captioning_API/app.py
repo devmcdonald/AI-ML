@@ -231,6 +231,7 @@ if link:
         except Exception as e:
             print(f"Failed to load the video file: {e}")
             exit()
+            
         translatedVideo = video_clip.set_audio(audio)
         translatedVideo.write_videofile(output_vid)
         
