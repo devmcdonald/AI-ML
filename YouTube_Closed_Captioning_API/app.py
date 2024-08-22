@@ -226,7 +226,8 @@ if link:
         
         # Replace audio of video
         audio = AudioFileClip(translatedAudio)
-        translatedVideo = output_vid.set_audio(audio)
+        video_clip = VideoFileClip(output_vid)
+        translatedVideo = video_clip.set_audio(audio)
         translatedVideo.write_videofile(output_vid)
         
         # Upload final video to streamlit
