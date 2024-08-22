@@ -33,7 +33,23 @@ import moviepy.config as mpy_config
 # Set the path to the ImageMagick binary
 mpy_config.change_settings({"IMAGEMAGICK_BINARY": "/usr/bin/convert"})
 
-
+def add_subtitles_to_video(input_video, subtitle_file, output_video):
+    try:
+        # Construct the FFmpeg command
+        command = [
+            'ffmpeg',
+            '-i', input_video,
+            '-vf', f"subtitles={subtitle_file}",
+            '-c:a', 'copy',
+            output_video
+        ]
+        
+        # Run the FFmpeg command
+        subprocess.run(command, check=True)
+        print(f"Subtitles added successfully. Output file: {output_video}")
+    
+    except subprocess.CalledProcessError as e:
+        print(f"Error occurred: {e}")
 
 # Progress callback function
 def on_progress(stream, chunk, bytes_remaining):
@@ -190,6 +206,8 @@ if link:
         translatedAudio = fixedText.replace(".srt", ".mp3")
         #Add translated subtitles to video
         output_vid = "output_vid.mp4"
+        add_subtitles_to_video(video, fixedText, output_vid)
+        """
         try:
             with open(fixedText, 'r', encoding='utf-8', errors='replace') as file:
                 sub_content = file.read()
@@ -204,7 +222,7 @@ if link:
         generator = lambda txt: TextClip(txt, font='Arial', fontsize=28, color='white')
         subs = SubtitlesClip(fixedText, generator) 
         result = CompositeVideoClip([video, subs.set_position(("center", "bottom"))])
-
+        """
         
         # Replace audio of video
         audio = AudioFileClip(translatedAudio)
