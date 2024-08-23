@@ -83,8 +83,8 @@ def authenticate_user():
     # Normally, you might run a command like 'pytube --auth' which outputs
     # 'Please open https://www.google.com/device and input code ...'
     # and then waits for an "Enter" press.
-    command = ""
-    #command = "pytube --auth"  # Replace with your actual command
+    
+    command = "pytube --auth"  # Replace with your actual command
     process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
 
     return process
@@ -103,10 +103,11 @@ st.write("Click the button below to start the authentication process.")
     
 if st.button("Start Authentication"):
     process = authenticate_user()
-        
-    for line in process.stdout:
-        st.write(line)
-        if "Please open" in line:
+    output_message = ""
+    
+    for line in iter(process.stdout.readline, ''):
+        output_message += line
+        if "Please open" in line and "and input code" in line:
             st.info(line.strip())
             break
         
