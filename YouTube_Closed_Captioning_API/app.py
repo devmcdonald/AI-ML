@@ -140,7 +140,7 @@ if link:
         engAudioFile = audio_path  # to reference in future
             
         # Translate audio files to text (English)
-        engModel = whisper.download_model()
+        engModel = download_model()
         result = engModel.transcribe(engAudioFile)
             
         # Save transcription as SRT file
