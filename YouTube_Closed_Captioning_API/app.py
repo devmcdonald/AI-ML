@@ -1,8 +1,9 @@
 import streamlit as st
 from transformers import *
 from PIL import Image
-from pytubefix import YouTube
-from pytubefix.cli import on_progress
+from pytube import YouTube
+#from pytubefix import YouTube
+#from pytubefix.cli import on_progress
 from pytube.exceptions import VideoUnavailable
 import openai
 import whisper
