@@ -108,13 +108,25 @@ if link:
         process = authenticate_user()
         
         output_message = ""
+        auth_url = ""
+        auth_code = ""
         
         # Read lines from the process output as they are produced
         for line in iter(process.stdout.readline, ''):
             output_message += line
+            st.write(line.strip())  # Display each line as it's read
+            
+            # Look for the specific line with the authentication URL and code
             if "Please open" in line and "and input code" in line:
-                st.info(line.strip())
+                # Extract the URL and code from the line
+                parts = line.split(" ")
+                auth_url = parts[2]  # Assuming the URL is the third part
+                auth_code = parts[-1]  # Assuming the code is the last part
                 break
+        
+        if auth_url and auth_code:
+            # Display the authentication instructions to the user
+            st.info(f"Please open [this link]({auth_url}) and input the code: **{auth_code}**")
         
         # Step 2: Show the rest of the output and wait for user confirmation
         st.write("After completing the authentication in your browser, click the button below.")
@@ -130,9 +142,6 @@ if link:
             if error:
                 st.subheader("Command Error (if any):")
                 st.text(error)
-        else:
-            # Show real-time output if user hasn't clicked the button yet
-            time.sleep(1)  # Allow time for process to continue running
     try:
         # pytube version
         vid = YouTube(link, use_oauth=True, allow_oauth_cache=True)
