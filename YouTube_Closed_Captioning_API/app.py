@@ -96,39 +96,44 @@ st.title("Foreign Whispers")
 link = ''
 link = st.text_input("YouTube URL: ")
 
-st.title("PyTube Authentication")
-
-# Step 1: Initiate authentication and provide instructions to the user
-st.write("Click the button below to start the authentication process.")
-    
-if st.button("Start Authentication"):
-    process = authenticate_user()
-    output_message = ""
-    
-    for line in iter(process.stdout.readline, ''):
-        output_message += line
-        if "Please open" in line and "and input code" in line:
-            st.info(line.strip())
-            break
-        
-        # Step 2: Wait for user confirmation
-    st.write("After completing the authentication in your browser, click the button below.")
-    if st.button("I've entered the code"):
-        process.communicate(input='\n')  # Simulate pressing "Enter"
-        output, error = process.communicate()
-
-        # Display the output and any error messages
-        st.subheader("Command Output:")
-        st.text(output)
-
-        if error:
-            st.subheader("Command Error (if any):")
-            st.text(error)
                 
 # Only continue with input link
 if link:
-    try:
+    st.title("PyTube Authentication")
+
+    # Step 1: Initiate authentication and provide instructions to the user
+    st.write("Click the button below to start the authentication process.")
+    
+    if st.button("Start Authentication"):
+        process = authenticate_user()
         
+        output_message = ""
+        
+        # Read lines from the process output as they are produced
+        for line in iter(process.stdout.readline, ''):
+            output_message += line
+            if "Please open" in line and "and input code" in line:
+                st.info(line.strip())
+                break
+        
+        # Step 2: Show the rest of the output and wait for user confirmation
+        st.write("After completing the authentication in your browser, click the button below.")
+        
+        if st.button("I've entered the code"):
+            process.communicate(input='\n')  # Simulate pressing "Enter"
+            remaining_output, error = process.communicate()
+            
+            # Display the remaining output and any error messages
+            st.subheader("Command Output:")
+            st.text(output_message + remaining_output)
+
+            if error:
+                st.subheader("Command Error (if any):")
+                st.text(error)
+        else:
+            # Show real-time output if user hasn't clicked the button yet
+            time.sleep(1)  # Allow time for process to continue running
+    try:
         # pytube version
         vid = YouTube(link, use_oauth=True, allow_oauth_cache=True)
         sanitized_title = sanitize_filename(vid.title)
