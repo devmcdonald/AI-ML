@@ -71,6 +71,10 @@ def format_timestamp(seconds):
     minutes = minutes % 60
     return f"{hours:02}:{minutes:02}:{seconds:02},{milliseconds:03}"
 
+@st.cache
+def download_model():
+    return whisper.load_model("base")
+
 #Page title
 st.title("Foreign Whispers")
 
@@ -114,7 +118,7 @@ if link:
         engAudioFile = audio_path  # to reference in future
             
         # Translate audio files to text (English)
-        engModel = whisper.load_model("base")
+        engModel = whisper.download_model()
         result = engModel.transcribe(engAudioFile)
             
         # Save transcription as SRT file
