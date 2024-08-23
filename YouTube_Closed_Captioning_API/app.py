@@ -115,8 +115,8 @@ if link:
         ys.download(filename=video_path)
         
     except Exception as e:
-        st.error(f"An error occurred: {e}")
-        st.stop()  # Stop execution if there's an error in downloading the video
+        st.error(f"An error occurred downloading the video: {e}")
+    
 
     title = vid.title
 
