@@ -85,13 +85,20 @@ link = st.text_input("YouTube URL: ")
 # Only continue with input link
 if link:
     try:
-        # pytubefix version
-        vid = YouTube(link, on_progress_callback=on_progress)
-        ys = vid.streams.get_highest_resolution()
+        
+        # pytube version
+        vid = YouTube(link, use_oauth=True, allow_oauth_cache=True)
         sanitized_title = sanitize_filename(vid.title)
         video_path = f"{sanitized_title}.mp4"
+        vid.streams.filter(progressive="True").get_highest_resolution().download(video_path)
+        """        
+        # pytubefix version
+        vid = YouTube(link, on_progress_callback=on_progress)
+        sanitized_title = sanitize_filename(vid.title)
+        video_path = f"{sanitized_title}.mp4"
+        ys = vid.streams.get_highest_resolution()
         ys.download(filename=video_path)
-        
+        """
     except Exception as e:
         st.error(f"An error occurred: {e}")
         st.stop()  # Stop execution if there's an error in downloading the video
