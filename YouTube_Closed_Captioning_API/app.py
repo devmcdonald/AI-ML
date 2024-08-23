@@ -76,6 +76,19 @@ def format_timestamp(seconds):
 def download_model():
     return whisper.load_model("base")
 
+def authenticate_user():
+    """
+    This function will initiate the authentication process.
+    """
+    # Normally, you might run a command like 'pytube --auth' which outputs
+    # 'Please open https://www.google.com/device and input code ...'
+    # and then waits for an "Enter" press.
+    command = ""
+    #command = "pytube --auth"  # Replace with your actual command
+    process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+
+    return process
+
 #Page title
 st.title("Foreign Whispers")
 
@@ -83,12 +96,40 @@ st.title("Foreign Whispers")
 link = ''
 link = st.text_input("YouTube URL: ")
 
+st.title("PyTube Authentication")
+
+# Step 1: Initiate authentication and provide instructions to the user
+st.write("Click the button below to start the authentication process.")
+    
+if st.button("Start Authentication"):
+    process = authenticate_user()
+        
+    for line in process.stdout:
+        st.write(line)
+        if "Please open" in line:
+            st.info(line.strip())
+            break
+        
+        # Step 2: Wait for user confirmation
+    st.write("After completing the authentication in your browser, click the button below.")
+    if st.button("I've entered the code"):
+        process.communicate(input='\n')  # Simulate pressing "Enter"
+        output, error = process.communicate()
+
+        # Display the output and any error messages
+        st.subheader("Command Output:")
+        st.text(output)
+
+        if error:
+            st.subheader("Command Error (if any):")
+            st.text(error)
+                
 # Only continue with input link
 if link:
     try:
         
         # pytube version
-        vid = YouTube(link, use_oauth=False, allow_oauth_cache=True)
+        vid = YouTube(link, use_oauth=True, allow_oauth_cache=True)
         sanitized_title = sanitize_filename(vid.title)
         video_path = f"{sanitized_title}.mp4"
         vid.streams.filter(progressive="True").get_highest_resolution().download(video_path)
