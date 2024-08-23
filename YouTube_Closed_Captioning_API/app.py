@@ -84,7 +84,7 @@ def authenticate_user():
     # 'Please open https://www.google.com/device and input code ...'
     # and then waits for an "Enter" press.
     
-    command = "pytube --auth"  # Replace with your actual command
+    command = ""  # Replace with your actual command
     process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
 
     return process
