@@ -157,7 +157,7 @@ tornado==6.4.1
 tqdm==4.66.4
 trainer
 transformers==4.33.3
-TTS
+TTS==0.20.6
 typeguard==4.3.0
 typer==0.12.3
 typing_extensions==4.12.2
