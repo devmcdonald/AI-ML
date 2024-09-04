@@ -12,9 +12,8 @@ RUN apt-get update && apt-get install -y \
 # Clone the repository
 RUN git clone https://github.com/devmcdonald/AI-ML.git
 
-WORKDIR /YouTube_Closed_Captioning_API
-
-RUN cd YouTube_Closed_Captioning_API
+# Set the working directory
+WORKDIR /AI-ML/YouTube_Closed_Captioning_API
 
 RUN pip install -r requirements.txt
 
