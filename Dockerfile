@@ -14,6 +14,8 @@ RUN git clone https://github.com/devmcdonald/AI-ML.git
 
 WORKDIR /YouTube_Closed_Captioning_API
 
+RUN cd YouTube_Closed_Captioning_API
+
 RUN pip install -r requirements.txt
 
 EXPOSE 8501
