@@ -17,5 +17,5 @@ deploy:
   on:
     repo: devmcdonald/AI-ML/YouTube_Closed_Captioning_API
     branch:
-      - develop
+      - main
   cleanup: 'false'
