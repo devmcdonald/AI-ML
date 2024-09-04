@@ -1,6 +1,6 @@
 language: python
 python:
-  - "3.11.9"
+  - "3.12"
 install:
   - cd YouTube_Closed_Captioning_API
   - python3 -m pip install --upgrade pip
