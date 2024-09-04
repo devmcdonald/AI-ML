@@ -165,7 +165,7 @@ tzdata==2024.1
 tzlocal==5.2
 umap-learn
 Unidecode==1.3.8
-urllib3==2.2.2
+urllib3<2
 validators==0.33.0
 Wand==0.6.13
 wasabi==1.1.3
