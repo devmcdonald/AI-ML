@@ -151,8 +151,8 @@ tiktoken==0.7.0
 tokenizers==0.13.3
 toml==0.10.2
 toolz==0.12.1
-torch
-torchaudio
+torch==2.1.0
+torchaudio==2.1.0
 tornado==6.4.1
 tqdm==4.66.4
 trainer
