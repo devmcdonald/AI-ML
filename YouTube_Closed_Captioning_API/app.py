@@ -190,7 +190,8 @@ def combine_video_audio_subtitles(video_path, fixedText, translatedAudio, output
 
 # Main application logic
 def main():
-    st.title("Foreign Whispers")
+    st.title("TEST")
+    # st.title("Foreign Whispers")
     link = st.text_input("YouTube URL: ")
 
     if link:
