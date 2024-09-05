@@ -78,7 +78,7 @@ def download_model():
 
 
 def download_youtube_video(link):
-    vid = YouTube(link, on_progress_callback=on_progress, use_po_token=True)
+    vid = YouTube(link, on_progress_callback=on_progress)
     sanitized_title = sanitize_filename(vid.title)
     video_path = f"{sanitized_title}.mp4"
     ys = vid.streams.get_highest_resolution()
