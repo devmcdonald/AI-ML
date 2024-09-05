@@ -1,12 +1,13 @@
 FROM python:3.9-slim
 
-# Install necessary packages
+# Install necessary packages including ffmpeg
 RUN apt-get update && apt-get install -y \
     imagemagick \
     build-essential \
     curl \
     software-properties-common \
     git \
+    ffmpeg \
     && rm -rf /var/lib/apt/lists/*
 
 # Clone the repository
@@ -15,6 +16,7 @@ RUN git clone https://github.com/devmcdonald/AI-ML.git
 # Set the working directory
 WORKDIR /AI-ML/YouTube_Closed_Captioning_API
 
+# Install Python dependencies
 RUN pip install -r requirements.txt -v
 
 EXPOSE 8501
