@@ -1,6 +1,6 @@
 FROM python:3.9-slim
 
-# Install necessary packages including ffmpeg
+# Install necessary packages
 RUN apt-get update && apt-get install -y --fix-missing\
     build-essential \
     imagemagick \
@@ -10,10 +10,10 @@ RUN apt-get update && apt-get install -y --fix-missing\
     ffmpeg \
     && rm -rf /var/lib/apt/lists/*
 
-ARG imagemagic_config=/etc/ImageMagick-7.1.1/policy.xml
-
-RUN if [ -f $imagemagic_config ] ; then sed -i 's/<policy domain="path" rights="none" pattern="PDF" \/>/<policy domain="path" rights="read|write" pattern="PDF" \/>/g' $imagemagic_config ; else echo did not see file $imagemagic_config ; fi
-
+# Modify the ImageMagick policy.xml to allow read and write access to all paths
+RUN sed -i 's/<policy domain="path" rights="none" pattern="@\*"/<policy domain="path" rights="read|write" pattern="@\*"/' /etc/ImageMagick-6/policy.xml || \
+    sed -i 's/<policy domain="path" rights="none" pattern="@\*"/<policy domain="path" rights="read|write" pattern="@\*"/' /etc/ImageMagick-7/policy.xml
+    
 # Clone the repository
 RUN git clone https://github.com/devmcdonald/AI-ML.git
 
