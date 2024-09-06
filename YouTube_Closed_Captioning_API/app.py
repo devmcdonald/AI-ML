@@ -17,7 +17,7 @@ import chardet
 import moviepy.config as mpy_config
 
 # Set the path to the ImageMagick binary
-mpy_config.change_settings({"IMAGEMAGICK_BINARY": "/usr/bin/convert"})
+# mpy_config.change_settings({"IMAGEMAGICK_BINARY": "/usr/bin/convert"})
 
 
 def detect_encoding(file_path):
