@@ -199,8 +199,7 @@ def combine_video_audio_subtitles(video_path, fixedText, translatedAudio, output
 
 # Main application logic
 def main():
-    st.title("Rebuilt!")
-    # st.title("Foreign Whispers")
+    st.title("Foreign Whispers")
     st.header("Welcome to Foreign Whispers. Input your English language YouTube URL and your desired output language. In a few minutes, you will have the video with translated audio and subtitles!")
     link = st.text_input("YouTube URL: ")
 
