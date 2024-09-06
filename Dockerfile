@@ -2,13 +2,25 @@ FROM python:3.9-slim
 
 # Install necessary packages including ffmpeg
 RUN apt-get update && apt-get install -y --fix-missing\
-    imagemagick \
     build-essential \
     curl \
     software-properties-common \
     git \
     ffmpeg \
     && rm -rf /var/lib/apt/lists/*
+
+## ImageMagicK Installation 
+RUN mkdir -p /tmp/distr && \
+    cd /tmp/distr && \
+    wget https://download.imagemagick.org/ImageMagick/download/releases/ImageMagick-7.0.11-2.tar.xz && \
+    tar xvf ImageMagick-7.0.11-2.tar.xz && \
+    cd ImageMagick-7.0.11-2 && \
+    ./configure --enable-shared=yes --disable-static --without-perl && \
+    make && \
+    make install && \
+    ldconfig /usr/local/lib && \
+    cd /tmp && \
+    rm -rf distr
 
 # Clone the repository
 RUN git clone https://github.com/devmcdonald/AI-ML.git
