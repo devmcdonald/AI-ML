@@ -17,7 +17,7 @@ import chardet
 import moviepy.config as mpy_config
 
 # Set the path to the ImageMagick binary
-# mpy_config.change_settings({"IMAGEMAGICK_BINARY": "/usr/bin/convert"})
+mpy_config.change_settings({"IMAGEMAGICK_BINARY": r"C:\Program Files\ImageMagick-7.1.1-Q16-HDRI\magick.exe"})
 
 
 def detect_encoding(file_path):
@@ -170,22 +170,32 @@ def generate_translation_audio(fixedText, dst):
 
 
 def combine_video_audio_subtitles(video_path, fixedText, translatedAudio, output_vid="output_vid.mp4"):
-    generator = lambda txt: TextClip(txt, font='Arial', fontsize=28, color='white')
+    # Create subtitle generator
+    generator = lambda txt: TextClip(txt, font='Arial', fontsize=18, color='white')
+    
+    # Create SubtitlesClip object
     subs = SubtitlesClip(fixedText, generator)
+    
+    # Load the original video
     video = VideoFileClip(video_path)
+    
+    # Combine video and subtitles
     result = CompositeVideoClip([video, subs.set_position(("center", "bottom"))])
-
+    
+    # Load the translated audio
     audio = AudioFileClip(translatedAudio)
-    try:
-        video_clip = VideoFileClip(output_vid)
-    except Exception as e:
-        print(f"Failed to load the video file: {e}")
-        exit()
-
-    translatedVideo = video_clip.set_audio(audio)
-    translatedVideo.write_videofile(output_vid)
+    
+    # Set the audio of the result video to the translated audio
+    result = result.set_audio(audio)
+    
+    # Write the final video to output file
+    result.write_videofile(output_vid)
+    
     st.text("Added translated subtitles and audio to video")
+    
+    # Return the path to the output video
     return output_vid
+
 
 
 # Main application logic

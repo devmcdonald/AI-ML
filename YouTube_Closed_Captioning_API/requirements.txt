@@ -156,7 +156,7 @@ torchaudio==2.1.0
 tornado==6.4.1
 tqdm==4.66.4
 trainer
-transformers==4.33.3
+transformers
 TTS==0.20.6
 typeguard==4.3.0
 typer==0.12.3
