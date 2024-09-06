@@ -3,24 +3,16 @@ FROM python:3.9-slim
 # Install necessary packages including ffmpeg
 RUN apt-get update && apt-get install -y --fix-missing\
     build-essential \
+    imagemagick \
     curl \
     software-properties-common \
     git \
     ffmpeg \
     && rm -rf /var/lib/apt/lists/*
 
-## ImageMagicK Installation 
-RUN mkdir -p /tmp/distr && \
-    cd /tmp/distr && \
-    wget https://download.imagemagick.org/ImageMagick/download/releases/ImageMagick-7.0.11-2.tar.xz && \
-    tar xvf ImageMagick-7.0.11-2.tar.xz && \
-    cd ImageMagick-7.0.11-2 && \
-    ./configure --enable-shared=yes --disable-static --without-perl && \
-    make && \
-    make install && \
-    ldconfig /usr/local/lib && \
-    cd /tmp && \
-    rm -rf distr
+ARG imagemagic_config=/etc/ImageMagick-7.1.1/policy.xml
+
+RUN if [ -f $imagemagic_config ] ; then sed -i 's/<policy domain="path" rights="none" pattern="PDF" \/>/<policy domain="path" rights="read|write" pattern="PDF" \/>/g' $imagemagic_config ; else echo did not see file $imagemagic_config ; fi
 
 # Clone the repository
 RUN git clone https://github.com/devmcdonald/AI-ML.git
