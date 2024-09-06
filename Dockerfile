@@ -1,7 +1,7 @@
 FROM python:3.9-slim
 
 # Install necessary packages including ffmpeg
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && apt-get install -y --fix-missing\
     imagemagick \
     build-essential \
     curl \
