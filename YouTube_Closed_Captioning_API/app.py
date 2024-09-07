@@ -101,7 +101,7 @@ def transcribe_audio_to_srt(engAudioFile, sanitized_title):
     engModel = download_model()
     result = engModel.transcribe(engAudioFile)
     srt_path = f"{sanitized_title}.srt"
-    with open(srt_path, 'w') as srt_file:
+    with open(srt_path, 'w', encoding='utf-8') as srt_file:
         for i, segment in enumerate(result["segments"]):
             start = segment["start"]
             end = segment["end"]
@@ -173,28 +173,29 @@ def generate_translation_audio(fixedText, dst):
 def combine_video_audio_subtitles(video_path, fixedText, translatedAudio, output_vid="output_vid.mp4"):
     # Load the original video to get its dimensions
     video = VideoFileClip(video_path)
-    video_width, video_height = video.size
-
-    # Create a subtitle generator with word wrapping
-    def subtitle_generator(txt):
-        # Wrap the text to fit within the video width, considering font size
-        wrapped_text = "\n".join(textwrap.wrap(txt, width=40))  # Adjust width for desired wrap length
-        return TextClip(wrapped_text, font='Arial', fontsize=16, color='white', size=(video_width - 100, None))
-
-    # Create SubtitlesClip object
-    subs = SubtitlesClip(fixedText, subtitle_generator)
-
-    # Combine video and subtitles
+    try:
+        with open(fixedText, 'r', encoding='utf-8', errors='replace') as file:
+            sub_content = file.read()
+    except UnicodeDecodeError:
+        try:
+            with open(fixedText, 'r', encoding='ISO-8859-1') as file:
+                sub_content = file.read()
+        except UnicodeDecodeError:
+            with open(fixedText, 'r', encoding='cp1252', errors='replace') as file:
+                sub_content = file.read()
+                
+    generator = lambda txt: TextClip(txt, font='Arial', fontsize=18, color='white')
+    subs = SubtitlesClip(fixedText, generator) 
     result = CompositeVideoClip([video, subs.set_position(("center", "bottom"))])
 
     # Load the translated audio
     audio = AudioFileClip(translatedAudio)
 
     # Set the audio of the result video to the translated audio
-    result = result.set_audio(audio)
+    translatedVideo = result.set_audio(audio)
 
     # Write the final video to output file
-    result.write_videofile(output_vid)
+    translatedVideo.write_videofile(output_vid)
     
     st.text("(5/5) Added translated subtitles and audio to video")
     
