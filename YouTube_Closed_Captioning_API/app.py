@@ -216,8 +216,12 @@ def generate_translation_audio(fixedText, dst):
             audio_segment = AudioFileClip(audio_segment_path)
 
             # Adjust the audio segment duration to match the subtitle timing
-            if audio_segment.duration != duration:
+            if audio_segment.duration > duration:
                 adjusted_audio_segment = audio_segment.fx(speedx, audio_segment.duration / duration)
+            elif audio_segment.duration < duration:
+                # Append silence to match the duration
+                silence = AudioFileClip("silence.mp3").subclip(0, duration - audio_segment.duration)
+                adjusted_audio_segment = concatenate_audioclips([audio_segment, silence])
             else:
                 adjusted_audio_segment = audio_segment
 
@@ -245,35 +249,55 @@ def convert_srt_time_to_seconds(srt_time):
     return total_seconds
 
 
+from moviepy.video.tools.subtitles import SubtitlesClip
+from moviepy.video.fx import resize
+import textwrap
+
+def wrap_text(text, width):
+    """
+    Wrap text to fit within a specified width.
+    """
+    return '\n'.join(textwrap.fill(line, width=width) for line in text.splitlines())
+
 def combine_video_audio_subtitles(video_path, fixedText, translatedAudio, output_vid="output_vid.mp4"):
     video = VideoFileClip(video_path)
-    
-    subs = pysrt.open(fixedText) 
+    video_width, video_height = video.size
+    subtitle_width = int(video_width * 0.9)  # 90% of video width
+
+    subs = pysrt.open(fixedText)
     subtitles = []
-    
+
     for sub in subs:
         # Get the start and end time for each subtitle
         start_time = sub.start.hours*3600 + sub.start.minutes*60 + sub.start.seconds + sub.start.milliseconds/1000
         end_time = sub.end.hours*3600 + sub.end.minutes*60 + sub.end.seconds + sub.end.milliseconds/1000
+        duration = end_time - start_time
 
-        # Create a TextClip for each subtitle
-        subtitle = TextClip(sub.text, fontsize=22, color='white', bg_color='black')
-        subtitle = subtitle.set_position(('center', 'bottom')).set_duration(end_time - start_time).set_start(start_time)
+        # Wrap the subtitle text
+        wrapped_text = wrap_text(sub.text, subtitle_width)
+
+        # Create a TextClip for each subtitle with wrapped text
+        subtitle = TextClip(wrapped_text, fontsize=18, color='white', bg_color='black', size=(subtitle_width, None))
+        subtitle = subtitle.set_position(('center', 'bottom')).set_duration(duration).set_start(start_time)
 
         # Append subtitle clip to the list
-        subtitles.append(subtitle)        
-    
+        subtitles.append(subtitle)
+
+    # Combine video and subtitles
     result = CompositeVideoClip([video] + subtitles)
 
     # Replace audio of video
     audio = AudioFileClip(translatedAudio)
     translatedVideo = result.set_audio(audio)
+
+
     translatedVideo.write_videofile(output_vid)
     
     st.text("(5/5) Added translated subtitles and audio to video")
     
     # Return the path to the output video
     return output_vid
+
 
 
 
