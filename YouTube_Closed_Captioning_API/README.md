@@ -22,11 +22,15 @@ Foreign Whispers is a tool designed to transform your video content by adding bo
 
 ## Example
 
-- **Input Video:**
-  <video src="https://github.com/devmcdonald/AI-ML/blob/73d5a5a0da49d642677ec95cdd28c860856c9159/YouTube_Closed_Captioning_API/Novak%20Djokovic%20The%2060%20Minutes%20Interview.mp4" width="300" controls />
+- **Input Video:**  
+  [Click here to view the input video](https://github.com/devmcdonald/AI-ML/blob/73d5a5a0da49d642677ec95cdd28c860856c9159/YouTube_Closed_Captioning_API/Novak%20Djokovic%20The%2060%20Minutes%20Interview.mp4)
 
-- **Output:**
-  <video src="https://github.com/devmcdonald/AI-ML/blob/73d5a5a0da49d642677ec95cdd28c860856c9159/YouTube_Closed_Captioning_API/output_vid.mp4" width="300" controls />
+
+
+- **Output:**  
+  [Click here to view the output video](https://github.com/devmcdonald/AI-ML/blob/73d5a5a0da49d642677ec95cdd28c860856c9159/YouTube_Closed_Captioning_API/output_vid.mp4)
+
+
 
 ## How to Use
 Before running the script, ensure you have Python installed on your machine. You can download Python from the [official website](https://www.python.org/downloads/).
