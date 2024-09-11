@@ -21,8 +21,8 @@ Foreign Whispers is a tool designed to transform your video content by adding bo
 - **Audio Artifacts:** Background noise and model variability can introduce random audio artifacts, affecting the clarity and quality of the output.
 
 ## Example
-- **Input Video:** 'Novak Djokovic The 60 Minutes Interview.mp4'
-- **Output:** `output_vid.mp4`
+- **Input Video:** <video src="[https://github.com/rayytsn9/ROBOTT/assets/79029536/62f541aa-aa8c-43f5-9ead-4b7a2e0d7c2a](https://github.com/devmcdonald/AI-ML/blob/73d5a5a0da49d642677ec95cdd28c860856c9159/YouTube_Closed_Captioning_API/Novak%20Djokovic%20The%2060%20Minutes%20Interview.mp4)" width="300" />
+- **Output:** <video src="https://github.com/devmcdonald/AI-ML/blob/73d5a5a0da49d642677ec95cdd28c860856c9159/YouTube_Closed_Captioning_API/output_vid.mp4" width="300" />
 
 ## How to Use
 Before running the script, ensure you have Python installed on your machine. You can download Python from the [official website](https://www.python.org/downloads/).
