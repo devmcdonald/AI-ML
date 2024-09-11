@@ -22,12 +22,14 @@ Foreign Whispers is a tool designed to transform your video content by adding bo
 
 ## Example
 
-- **Input Video:**  
-C:\Users\devin\OneDrive\Documents\Github\AI-ML\YouTube_Closed_Captioning_API\Novak Djokovic The 60 Minutes Interview.mp4
+- **Input Clip:**  
 
 
-- **Output:**  
-  [Click here to view the output video](https://github.com/devmcdonald/AI-ML/blob/73d5a5a0da49d642677ec95cdd28c860856c9159/YouTube_Closed_Captioning_API/output_vid.mp4)
+- **Output Clip:**  
+
+
+
+https://github.com/user-attachments/assets/ebfa3131-7ae7-4c4e-ba85-378cf3c4d3c0
 
 
 
