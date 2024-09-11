@@ -15,10 +15,12 @@ import re
 import subprocess
 import chardet
 import moviepy.config as mpy_config
-import textwrap
+from moviepy.editor import concatenate_audioclips
+import pysrt
+from moviepy.video.fx.all import speedx
 
 # Uncomment for local deployment/testing
-# mpy_config.change_settings({"IMAGEMAGICK_BINARY": r"C:\Program Files\ImageMagick-7.1.1-Q16-HDRI\magick.exe"})
+mpy_config.change_settings({"IMAGEMAGICK_BINARY": r"C:\Program Files\ImageMagick-7.1.1-Q16-HDRI\magick.exe"})
 
 
 def detect_encoding(file_path):
@@ -118,15 +120,42 @@ def translate_srt_file(engTextFile, src, dst):
     model_name = f"Helsinki-NLP/opus-mt-{src}-{dst}"
     translator = pipeline(task_name, model=model_name, tokenizer=model_name)
 
-    with open(engTextFile, 'r') as f:
+    # Open and read the original SRT file
+    with open(engTextFile, 'r', encoding='utf-8') as f:
         englishLines = f.read()
-        lines = re.split(r'\n\n', englishLines)
-        translatedLines = [translator(line)[0]["translation_text"] + '\n' for line in lines]
 
+    # Split into subtitle blocks (each block contains a timestamp and text)
+    blocks = re.split(r'\n\n', englishLines.strip())  # strip extra spaces
+
+    translated_blocks = []
+    
+    for block in blocks:
+        # Split each block into lines
+        lines = block.strip().split('\n')
+        
+        # Ensure block has at least three lines (subtitle number, timestamp, and text)
+        if len(lines) < 3:
+            continue  # Skip incomplete or improperly formatted blocks
+        
+        # Extract subtitle number, timestamp, and text
+        subtitle_number = lines[0]
+        timestamp = lines[1]
+        text_lines = lines[2:]
+
+        # Join the text lines and translate
+        text_to_translate = ' '.join(text_lines).strip()
+        
+        if text_to_translate:
+            # Translate the text
+            translated_text = translator(text_to_translate)[0]["translation_text"]
+            translated_block = f"{subtitle_number}\n{timestamp}\n{translated_text}\n"
+            translated_blocks.append(translated_block)
+
+    # Write the translated blocks to a new file
     translationText = engTextFile.replace(".srt", " translation.srt")
-    with open(translationText, 'w') as n:
-        for line in translatedLines:
-            n.write(line)
+    with open(translationText, 'w', encoding='utf-8') as n:
+        n.write('\n\n'.join(translated_blocks))
+
     st.text("(3/5) Successfully translated text")
     return translationText
 
@@ -157,44 +186,88 @@ def fix_srt_formatting(translationText):
 
     return fixedText
 
-
 def generate_translation_audio(fixedText, dst):
     model_name = f"tts_models/{dst}/css10/vits"
-    translationAudio = fixedText.replace(".srt", ".mp3")
-
     tts = TTS(model_name=model_name, progress_bar=False)
+
+    translation_audio_segments = []
+    translationAudio = fixedText.replace(".srt", ".mp3")
+    
     with open(fixedText, 'r') as f:
-        txt = f.read()
-        tts.tts_to_file(text=txt, file_path=translationAudio)
-    st.text("(4/5) Successfully generated translated audio")
+        lines = f.readlines()
+
+    i = 0
+    while i < len(lines):
+        if re.match(r"^\d+$", lines[i].strip()):  # Sequence number
+            time_range = lines[i+1].strip()
+            text = lines[i+2].strip()
+
+            # Extract start and end times from SRT
+            start_time, end_time = time_range.split(" --> ")
+            start_secs = convert_srt_time_to_seconds(start_time)
+            end_secs = convert_srt_time_to_seconds(end_time)
+            duration = end_secs - start_secs
+
+            # Generate audio for this subtitle segment
+            audio_segment_path = f"temp_segment_{i//4}.mp3"
+            tts.tts_to_file(text=text, file_path=audio_segment_path)
+            
+            # Load the generated audio segment
+            audio_segment = AudioFileClip(audio_segment_path)
+
+            # Adjust the audio segment duration to match the subtitle timing
+            if audio_segment.duration != duration:
+                adjusted_audio_segment = audio_segment.fx(speedx, audio_segment.duration / duration)
+            else:
+                adjusted_audio_segment = audio_segment
+
+            # Append to the list of audio segments
+            translation_audio_segments.append(adjusted_audio_segment)
+
+            i += 4  # Move to the next subtitle block
+        else:
+            i += 1
+
+    # Concatenate all audio segments into a single file
+    final_audio = concatenate_audioclips(translation_audio_segments)
+    final_audio.write_audiofile(translationAudio)
+
+    st.text("(4/5) Successfully generated aligned translated audio")
     return translationAudio
 
 
+
+def convert_srt_time_to_seconds(srt_time):
+    """Helper function to convert SRT time format (HH:MM:SS,MS) to seconds."""
+    time_parts = re.split('[:,]', srt_time)
+    hours, minutes, seconds, milliseconds = map(int, time_parts)
+    total_seconds = hours * 3600 + minutes * 60 + seconds + milliseconds / 1000.0
+    return total_seconds
+
+
 def combine_video_audio_subtitles(video_path, fixedText, translatedAudio, output_vid="output_vid.mp4"):
-    # Load the original video to get its dimensions
     video = VideoFileClip(video_path)
-    try:
-        with open(fixedText, 'r', encoding='utf-8', errors='replace') as file:
-            sub_content = file.read()
-    except UnicodeDecodeError:
-        try:
-            with open(fixedText, 'r', encoding='ISO-8859-1') as file:
-                sub_content = file.read()
-        except UnicodeDecodeError:
-            with open(fixedText, 'r', encoding='cp1252', errors='replace') as file:
-                sub_content = file.read()
-                
-    generator = lambda txt: TextClip(txt, font='Arial', fontsize=18, color='white')
-    subs = SubtitlesClip(fixedText, generator) 
-    result = CompositeVideoClip([video, subs.set_position(("center", "bottom"))])
+    
+    subs = pysrt.open(fixedText) 
+    subtitles = []
+    
+    for sub in subs:
+        # Get the start and end time for each subtitle
+        start_time = sub.start.hours*3600 + sub.start.minutes*60 + sub.start.seconds + sub.start.milliseconds/1000
+        end_time = sub.end.hours*3600 + sub.end.minutes*60 + sub.end.seconds + sub.end.milliseconds/1000
 
-    # Load the translated audio
+        # Create a TextClip for each subtitle
+        subtitle = TextClip(sub.text, fontsize=22, color='white', bg_color='black')
+        subtitle = subtitle.set_position(('center', 'bottom')).set_duration(end_time - start_time).set_start(start_time)
+
+        # Append subtitle clip to the list
+        subtitles.append(subtitle)        
+    
+    result = CompositeVideoClip([video] + subtitles)
+
+    # Replace audio of video
     audio = AudioFileClip(translatedAudio)
-
-    # Set the audio of the result video to the translated audio
     translatedVideo = result.set_audio(audio)
-
-    # Write the final video to output file
     translatedVideo.write_videofile(output_vid)
     
     st.text("(5/5) Added translated subtitles and audio to video")
@@ -231,10 +304,8 @@ def main():
             audio_path = extract_audio_from_video(video_path, sanitize_filename(title))
             srt_path = transcribe_audio_to_srt(audio_path, sanitize_filename(title))
             translationText = translate_srt_file(srt_path, src, dst)
-            fixedText = fix_srt_formatting(translationText)
-            fix_srt_encoding(fixedText)
-            translationAudio = generate_translation_audio(fixedText, dst)
-            output_vid = combine_video_audio_subtitles(video_path, fixedText, translationAudio)
+            translationAudio = generate_translation_audio(translationText, dst)
+            output_vid = combine_video_audio_subtitles(video_path, translationText, translationAudio)
 
             st.video(output_vid, format="video/mp4", start_time=0)
 
