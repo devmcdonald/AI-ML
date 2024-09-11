@@ -193,10 +193,16 @@ def generate_translation_audio(fixedText, dst):
     translation_audio_segments = []
     translationAudio = fixedText.replace(".srt", ".mp3")
     
+    # Generate a silent audio clip
+    silence_duration = 5  # Duration of silence in seconds
+    silence = AudioFileClip("silence.mp3").subclip(0, silence_duration)
+
     with open(fixedText, 'r') as f:
         lines = f.readlines()
 
     i = 0
+    last_end_time = 0
+
     while i < len(lines):
         if re.match(r"^\d+$", lines[i].strip()):  # Sequence number
             time_range = lines[i+1].strip()
@@ -207,6 +213,16 @@ def generate_translation_audio(fixedText, dst):
             start_secs = convert_srt_time_to_seconds(start_time)
             end_secs = convert_srt_time_to_seconds(end_time)
             duration = end_secs - start_secs
+
+            # Calculate the gap between the end of the last subtitle and the start of the current one
+            if i > 0:
+                gap = start_secs - last_end_time
+                if gap > 0:
+                    # Append silence for the gap
+                    silence_needed = gap
+                    num_silences = int(silence_needed / silence_duration) + 1
+                    silence_clip = concatenate_audioclips([silence] * num_silences).subclip(0, silence_needed)
+                    translation_audio_segments.append(silence_clip)
 
             # Generate audio for this subtitle segment
             audio_segment_path = f"temp_segment_{i//4}.mp3"
@@ -220,13 +236,16 @@ def generate_translation_audio(fixedText, dst):
                 adjusted_audio_segment = audio_segment.fx(speedx, audio_segment.duration / duration)
             elif audio_segment.duration < duration:
                 # Append silence to match the duration
-                silence = AudioFileClip("silence.mp3").subclip(0, duration - audio_segment.duration)
-                adjusted_audio_segment = concatenate_audioclips([audio_segment, silence])
+                silence_needed = duration - audio_segment.duration
+                num_silences = int(silence_needed / silence_duration) + 1
+                silence_clip = concatenate_audioclips([silence] * num_silences).subclip(0, silence_needed)
+                adjusted_audio_segment = concatenate_audioclips([audio_segment, silence_clip])
             else:
                 adjusted_audio_segment = audio_segment
 
             # Append to the list of audio segments
             translation_audio_segments.append(adjusted_audio_segment)
+            last_end_time = end_secs
 
             i += 4  # Move to the next subtitle block
         else:
@@ -238,6 +257,7 @@ def generate_translation_audio(fixedText, dst):
 
     st.text("(4/5) Successfully generated aligned translated audio")
     return translationAudio
+
 
 
 
