@@ -24,12 +24,16 @@ Foreign Whispers is a tool designed to transform your video content by adding bo
 
 - **Input Clip:**  
 
-https://github.com/user-attachments/assets/23c7b268-ec94-4fe2-a490-163eeed0fab0
+
+https://github.com/user-attachments/assets/2ac13597-939f-4d25-91ef-eaa9186af6f1
 
 
 - **Output Clip:**  
 
-https://github.com/user-attachments/assets/9fd9f106-6f9b-4456-ba36-24d6b1f7c15c
+
+https://github.com/user-attachments/assets/5648f76f-e73b-4354-80af-96713cb2a961
+
+
 
 
 
